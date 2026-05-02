@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import 'tailwindcss';
+
+@theme {
+    --font-noto: 'Noto Sans', sans-serif;
+    --font-jetbrains: 'JetBrains Mono', monospace;
+
+    --color-background: #1d2021;
+    --color-foreground: #fbf1c7;
+    --color-bright-foreground: #fbf1c7;
+    --color-dim-foreground: #1d2021;
+    --color-black: #1d2021;
+    --color-bright-black: #73675e;
+    --color-dim-black: #fbf1c7;
+    --color-red: #fb4a35;
+    --color-bright-red: #93201d;
+    --color-dim-red: #ffaa95;
+    --color-green: #b7bb26;
+    --color-bright-green: #605c1b;
+    --color-dim-green: #e0dc98;
+    --color-yellow: #f9bd2f;
+    --color-bright-yellow: #91611b;
+    --color-dim-yellow: #fedc9b;
+    --color-blue: #83a598;
+    --color-bright-blue: #414f4a;
+    --color-dim-blue: #c0d2cb;
+    --color-magenta: #d3869b;
+    --color-bright-magenta: #8e5868;
+    --color-dim-magenta: #ff9ebb;
+    --color-cyan: #8ec07c;
+    --color-bright-cyan: #45603e;
+    --color-dim-cyan: #c7dfbd;
+    --color-white: #fbf1c7;
+    --color-bright-white: #fbf1c7;
+    --color-dim-white: #b0a189;
+}
