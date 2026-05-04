@@ -18,14 +18,15 @@ let dragStartIndex = -1;
 
 export default function PlaygroundKeyboard(props: Props) {
   const getKeyStyle = (i: number) => {
+    let opacity = '1.0';
     if (props.excludedIndices().has(i)) {
-      return { 'background-color': 'green', opacity: '0.4' };
+      opacity = '0.33';
     }
     const ld = props.languageData();
-    if (!ld) return { 'background-color': 'rgb(86, 124, 126)' };
+    if (!ld) return { 'background-color': 'rgb(86, 124, 126)', opacity };
     const char = props.layout()[i];
     const prevalence = ld.characters[char] ?? 0;
-    return { 'background-color': keyColor(prevalence) };
+    return { 'background-color': keyColor(prevalence), opacity };
   };
 
   const handleDrop = (endIndex: number) => {
@@ -72,11 +73,13 @@ export default function PlaygroundKeyboard(props: Props) {
       {props.layout()[i]}
     </div>
   );
+    
+  const onCopyLayout = () => props.onCopyLayout();
 
   return (
     <div
       class="mx-auto w-full max-w-2xl bg-[#444] rounded-lg p-1.5 text-xl sm:text-2xl md:text-3xl overflow-hidden cursor-pointer"
-      onClick={props.onCopyLayout}
+      onClick={onCopyLayout}
     >
       <div class="grid grid-cols-11 gap-0.5">
         <For each={[0, 1, 2]}>
