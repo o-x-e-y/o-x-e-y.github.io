@@ -27,6 +27,7 @@
             buildInputs = [
               bun
               pkg-config
+              eslint
             ];
           };
       }

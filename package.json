@@ -11,11 +11,16 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@typescript-eslint/parser": "^8.47.0",
     "@tailwindcss/vite": "^4.0.7",
     "tailwindcss": "^4.1.8",
     "typescript": "^5.7.2",
     "vite": "^6.0.0",
-    "vite-plugin-solid": "^2.11.6"
+    "vite-plugin-solid": "^2.11.6",
+    "solid-devtools": "^0.34.3",
+    "eslint": "^10.3.0",
+    "eslint-plugin-solid": "^0.14.5",
+    "@eslint/js": "^10.0.1"
   },
   "dependencies": {
     "@solidjs/router": "^0.16.1",
