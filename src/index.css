@@ -69,8 +69,8 @@ h4 {
     font-weight: 700;
 }
 
-a:link { color: #4C72CF; }
-a:visited { color: #7E4DCF; }
+a:link { color: color-mix(in srgb, #4C72CF, white 30%); }
+a:visited { color: color-mix(in srgb, #7E4DCF, white 30%); }
 
 code {
     background-color: #444;
