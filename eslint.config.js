@@ -6,7 +6,7 @@ import * as tsParser from "@typescript-eslint/parser";
 export default [
     js.configs.recommended,
     {
-        ignores: ["dist/**", "node_modules/**"],
+        ignores: ["dist/**", "node_modules/**", "public/**"],
     },
     {
         files: ["**/*.{ts,tsx}"],
@@ -19,6 +19,9 @@ export default [
             parserOptions: {
                 project: "tsconfig.json",
             },
+        },
+        rules: {
+            "no-unused-vars": ["warn", { varsIgnorePattern: "^_", argsIgnorePattern: "^_" }],
         },
     },
 ];

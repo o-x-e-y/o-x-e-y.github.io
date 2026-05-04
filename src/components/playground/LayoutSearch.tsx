@@ -2,7 +2,7 @@ import { createSignal, For, Show } from 'solid-js';
 import layout_names from '../../data/layout_names';
 
 interface Props {
-  onSelect: (layout: string, language: string) => void;
+  onSelect: (_layout: string, _language: string) => void;
 }
 
 function* getTrigrams(str: string): Generator<string> {

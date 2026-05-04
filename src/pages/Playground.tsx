@@ -73,22 +73,23 @@ export default function Playground() {
   }));
 
   const loadLanguage = (lang: string, newLayout?: string) => {
+    const ld = languageData();
+    const currentLayout = layout();
     fetch(`/data/${lang}.json`)
       .then(r => r.json())
       .then((data: LanguageData) => {
-        const ld = languageData();
         let converted: string;
         if (newLayout !== undefined) {
           converted = [...newLayout].map(c => data.convert[c] ?? c).join('');
         } else if (ld) {
           const back: Record<string, string> = {};
           for (const [k, v] of Object.entries(ld.convert)) back[v] = k;
-          converted = [...layout()].map(c => {
+          converted = [...currentLayout].map(c => {
             const reverted = back[c] ?? c;
             return data.convert[reverted] ?? reverted;
           }).join('');
         } else {
-          converted = layout();
+          converted = currentLayout;
         }
         batch(() => {
           setLanguageDataSignal(data);
