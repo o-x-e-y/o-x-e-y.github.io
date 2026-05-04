@@ -1,4 +1,4 @@
-import { For } from 'solid-js';
+import { For, onMount, onCleanup } from 'solid-js';
 import type { Accessor, Setter } from 'solid-js';
 import { keyColor } from '../../lib/analyzer';
 import type { LanguageData } from '../../lib/analyzer';
@@ -15,8 +15,15 @@ interface Props {
 const key_css = "border border-[#555] rounded-lg text-center leading-7 select-none pb-2 pt-1 cursor-default";
 
 let dragStartIndex = -1;
+let touchStartIndex = -1;
+let touchStartX = 0;
+let touchStartY = 0;
+let touchIsDragging = false;
+let touchLongPressFired = false;
+let longPressTimer: ReturnType<typeof setTimeout> | null = null;
 
 export default function PlaygroundKeyboard(props: Props) {
+  let containerRef: HTMLDivElement | undefined = undefined;
   const getKeyStyle = (i: number) => {
     let opacity = '1.0';
     if (props.excludedIndices().has(i)) {
@@ -49,8 +56,8 @@ export default function PlaygroundKeyboard(props: Props) {
     dragStartIndex = -1;
   };
 
-  const toggleExclude = (e: MouseEvent, i: number) => {
-    e.preventDefault();
+  const toggleExclude = (e: MouseEvent | null, i: number) => {
+    e?.preventDefault();
     props.setExcludedIndices(prev => {
       const next = new Set(prev);
       if (next.has(i)) next.delete(i); else next.add(i);
@@ -58,9 +65,69 @@ export default function PlaygroundKeyboard(props: Props) {
     });
   };
 
+  const cancelLongPress = () => {
+    if (longPressTimer !== null) { clearTimeout(longPressTimer); longPressTimer = null; }
+  };
+
+  const handleTouchStart = (e: TouchEvent, i: number) => {
+    const t = e.touches[0];
+    touchStartIndex = i;
+    touchStartX = t.clientX;
+    touchStartY = t.clientY;
+    touchIsDragging = false;
+    touchLongPressFired = false;
+    cancelLongPress();
+    longPressTimer = setTimeout(() => {
+      longPressTimer = null;
+      touchLongPressFired = true;
+      toggleExclude(null, i);
+    }, 500);
+  };
+
+  const handleTouchMove = (e: TouchEvent) => {
+    if (touchStartIndex === -1) return;
+    const t = e.touches[0];
+    const dist = Math.hypot(t.clientX - touchStartX, t.clientY - touchStartY);
+    if (!touchIsDragging && dist > 10) {
+      touchIsDragging = true;
+      cancelLongPress();
+    }
+    if (touchIsDragging) e.preventDefault();
+  };
+
+  const handleTouchEnd = (e: TouchEvent) => {
+    cancelLongPress();
+    if (touchIsDragging && touchStartIndex !== -1) {
+      const t = e.changedTouches[0];
+      const el = document.elementFromPoint(t.clientX, t.clientY);
+      const keyEl = el?.closest('[data-key-index]');
+      if (keyEl) {
+        const endIndex = parseInt(keyEl.getAttribute('data-key-index')!, 10);
+        if (!isNaN(endIndex) && endIndex !== touchStartIndex) {
+          dragStartIndex = touchStartIndex;
+          handleDrop(endIndex);
+        }
+      }
+      e.preventDefault();
+    } else if (touchLongPressFired) {
+      e.preventDefault();
+    }
+    touchStartIndex = -1;
+    touchIsDragging = false;
+    touchLongPressFired = false;
+  };
+
+  onMount(() => {
+    containerRef?.addEventListener('touchmove', handleTouchMove, { passive: false });
+  });
+  onCleanup(() => {
+    containerRef?.removeEventListener('touchmove', handleTouchMove);
+  });
+
   const renderKey = (i: number) => (
     <div
       draggable={true}
+      data-key-index={i}
       class={key_css}
       style={getKeyStyle(i)}
       title={`Key usage: ${((props.languageData()?.characters[props.layout()[i]] ?? 0) * 100).toFixed(2)}%`}
@@ -69,6 +136,8 @@ export default function PlaygroundKeyboard(props: Props) {
       onDragOver={(e: DragEvent) => e.preventDefault()}
       onDragEnd={() => { dragStartIndex = -1; }}
       onContextMenu={(e: MouseEvent) => toggleExclude(e, i)}
+      onTouchStart={(e: TouchEvent) => handleTouchStart(e, i)}
+      onTouchEnd={(e: TouchEvent) => handleTouchEnd(e)}
     >
       {props.layout()[i]}
     </div>
@@ -78,6 +147,7 @@ export default function PlaygroundKeyboard(props: Props) {
 
   return (
     <div
+      ref={containerRef}
       class="mx-auto w-full max-w-2xl bg-[#444] rounded-lg p-1.5 text-xl sm:text-2xl md:text-3xl overflow-hidden cursor-pointer"
       onClick={onCopyLayout}
     >
