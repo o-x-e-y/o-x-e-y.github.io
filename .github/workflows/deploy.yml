@@ -26,7 +26,7 @@ jobs:
       - name: Restore data files
         run: |
           git fetch origin data-files
-          git checkout origin/data-files -- public/data/ public/stored_layouts/
+          git checkout origin/data-files -- public/data/
 
       - uses: oven-sh/setup-bun@v2
         with:
