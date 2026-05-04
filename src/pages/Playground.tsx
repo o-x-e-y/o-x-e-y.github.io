@@ -1,10 +1,10 @@
 import { createSignal, createMemo, createEffect, on, onMount, batch, For } from 'solid-js';
-import { A } from '@solidjs/router';
 import PlaygroundKeyboard from '../components/playground/PlaygroundKeyboard';
 import LayoutSearch from '../components/playground/LayoutSearch';
 import AnalysisPanel from '../components/playground/AnalysisPanel';
 import { analyzeLayout } from '../lib/analyzer';
 import type { LanguageData, AnalysisResult } from '../lib/analyzer';
+import HomeButton from '../components/HomeButton';
 
 // vmlcpqfouj / strdy.naei / zkxgwbh';, / =/␣⇧⇯-
 const DEFAULT_LAYOUT = "vmlcpqfoujstrdy.naeizkxgwbh';,=/\u2423\u21E7\u21EF-";
@@ -114,11 +114,7 @@ export default function Playground() {
 
   return (
     <>
-      <div style={{ position: 'absolute', top: '0.5rem', left: '0.5rem' }}>
-        <A href="/" style={{ color: '#aaa', 'text-decoration': 'none', 'font-size': '0.9rem' }}>
-          ← Home
-        </A>
-      </div>
+      <HomeButton/>
       <header>
         <h1>Layout Playground</h1>
       </header>
