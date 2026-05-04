@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:wght@300&display=swap');
 @import 'tailwindcss';
 
 @theme {
     --font-noto: 'Noto Sans', sans-serif;
     --font-jetbrains: 'JetBrains Mono', monospace;
+    --font-roboto-mono: 'Roboto Mono', monospace;
 
     --color-background: #1d2021;
     --color-foreground: #fbf1c7;
@@ -33,4 +34,64 @@
     --color-white: #fbf1c7;
     --color-bright-white: #fbf1c7;
     --color-dim-white: #b0a189;
+}
+
+/* Global element styles — layout and component styles live in Tailwind */
+
+html {
+    background-color: #222;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 18px;
+    color: #ddd;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    /*padding: 0.5rem;*/
+    text-decoration: underline;
+    text-decoration-color: #777;
+    text-decoration-thickness: 1px;
+}
+
+h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 0.75rem auto;
+    text-decoration: underline;
+    text-decoration-color: #777;
+    text-decoration-thickness: 1px;
+}
+
+h4 {
+    font-weight: 700;
+}
+
+a:link { color: #4C72CF; }
+a:visited { color: #7E4DCF; }
+
+code {
+    background-color: #444;
+    padding: 0 3px;
+    border-radius: 2px;
+}
+
+article {
+    background-color: #333;
+    width: 90%;
+    max-width: 56rem;
+    margin: 0 auto 1rem;
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+section {
+    margin: 1rem;
+    line-height: 1.5;
+    border: 2px solid #444;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background-color: #393939;
 }

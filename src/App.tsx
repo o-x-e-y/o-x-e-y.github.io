@@ -1,18 +1,28 @@
-import type { Component } from 'solid-js';
-import Sidebar from './Sidebar';
-import FileSelector from './FileSelector';
-import Editor from './Editor';
+import { HashRouter, Route } from '@solidjs/router';
+import Home from './pages/Home';
+import Noctum from './pages/layouts/Noctum';
+import Compound from './pages/layouts/Compound';
+import Crest from './pages/layouts/Crest';
+import Dhorf from './pages/layouts/Dhorf';
+import Dvarf from './pages/layouts/Dvarf';
+import HandsRight from './pages/layouts/HandsRight';
+import HandsUp from './pages/layouts/HandsUp';
+import Stronk from './pages/layouts/Stronk';
+import Sturdy from './pages/layouts/Sturdy';
 
-const App: Component = () => {
+export default function App() {
   return (
-        <div class="flex text-foreground">
-            <Sidebar/>
-            <div class="w-full">
-                <FileSelector/>
-                <Editor/>
-            </div>
-        </div>
+    <HashRouter>
+      <Route path="/" component={Home} />
+      <Route path="/layouts/noctum" component={Noctum} />
+      <Route path="/layouts/compound" component={Compound} />
+      <Route path="/layouts/crest" component={Crest} />
+      <Route path="/layouts/dhorf" component={Dhorf} />
+      <Route path="/layouts/dvarf" component={Dvarf} />
+      <Route path="/layouts/hands-right" component={HandsRight} />
+      <Route path="/layouts/hands-up" component={HandsUp} />
+      <Route path="/layouts/stronk" component={Stronk} />
+      <Route path="/layouts/sturdy" component={Sturdy} />
+    </HashRouter>
   );
-};
-
-export default App;
+}
