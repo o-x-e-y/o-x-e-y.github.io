@@ -8,7 +8,9 @@ export default function Home() {
       </header>
       <article>
         <section>
-          This is where I'll keep all my layouts worth remembering. I have a few categories:
+          This is where I'll keep all my layouts worth remembering.{' '}
+          <A href="/playground">Layout Playground</A> is available for interactive analysis.
+          I have a few categories:
           <h4>Absolutely worth using:</h4>
           <ul>
             <li><A href="/layouts/stronk">Stronk</A></li>
