@@ -77,7 +77,11 @@ const KeyTile = (props: KeyTileProps) => {
       class={key_css}
       style={props.style()}
       title={props.title()}
-      onContextMenu={(e: MouseEvent) => { e.preventDefault(); props.onToggleExclude(props.index); }}
+      onContextMenu={(e: MouseEvent) => {
+        e.preventDefault();
+        cancelLongPress();
+        if (!longPressFired) props.onToggleExclude(props.index);
+      }}
       onTouchStart={handleTouchStart}
       onTouchMove={cancelLongPress}
       onTouchEnd={handleTouchEnd}
