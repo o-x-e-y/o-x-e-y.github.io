@@ -5,7 +5,7 @@ interface Props {
   keys: KeyData[];
 }
 
-const key_css = "border border-[#555] rounded-lg text-center leading-7 select-none pb-2 pt-1";
+const key_css = "border border-[#555] rounded-[1.4cqw] text-center select-none pt-[2.8cqw] pb-[3.6cqw] cursor-default touch-none";
 
 export default function Keyboard(props: Props) {
   const rows = () => [
@@ -15,8 +15,8 @@ export default function Keyboard(props: Props) {
   ];
 
   return (
-    <div class="mx-auto w-full max-w-2xl bg-[#444] rounded-lg p-1.5 text-xl sm:text-2xl md:text-3xl overflow-hidden">
-      <div class="grid grid-cols-11 gap-0.5">
+    <div class="mx-auto w-full max-w-2xl bg-[#444] rounded-[1.5cqw] p-[0.8cqw] overflow-hidden" style={{ 'container-type': 'inline-size' }}>
+      <div class="grid grid-cols-11 gap-[0.4cqw]" style={{ 'font-size': '4.2cqw', 'line-height': '0' }}>
         <For each={rows()}>
           {(row) => (
             <>

@@ -46,17 +46,16 @@ html {
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: min(5vw, 2.5rem);
     font-weight: 700;
     text-align: center;
-    /*padding: 0.5rem;*/
     text-decoration: underline;
     text-decoration-color: #777;
     text-decoration-thickness: 1px;
 }
 
 h2 {
-    font-size: 1.75rem;
+    font-size: min(3vw, 1.5rem);
     font-weight: 700;
     text-align: center;
     margin: 0.75rem auto;

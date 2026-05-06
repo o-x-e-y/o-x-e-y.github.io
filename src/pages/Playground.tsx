@@ -127,9 +127,7 @@ export default function Playground() {
           languageData={languageData}
           onCopyLayout={copyLayout}
         />
-        <div style={{
-          'margin-top': 'max(0.7vh, 0.8vw)',
-          'margin-bottom': 'max(0.52vh, 0.6vw)',
+        <div class="my-1 sm:mb-2 sm:mt-3" style={{
           'text-align': 'center',
           display: 'flex',
           'align-items': 'center',

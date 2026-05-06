@@ -58,22 +58,16 @@ export default function AnalysisPanel(props: Props) {
   };
 
   return (
-    <section
-      style={{ 'margin-top': 'max(0.875vh, 1vw)', cursor: 'pointer' }}
+    <div
+      class="cursor-pointer border-2 border-[#444] rounded-lg bg-[#393939] p-1 sm:p-2"
       onClick={copyStats}
       title="Click to copy stats"
     >
-      <div style={{
-        padding: '0.5vw',
-        display: 'grid',
+        <div class="grid p-[0.5vw] gap-[1.5vw] grid-flow-col" style={{
         'grid-auto-columns': 'minmax(0, 1fr)',
-        'grid-auto-flow': 'column',
-        'column-gap': '1.5vw',
       }}>
         {/* Left panel: finger usage & SFB per finger */}
-        <div style={{
-          padding: '0.5vw',
-          'padding-top': '0.8vw',
+        <div class="p-[1vw]" style={{
           'background-color': '#444',
           'text-align': 'center',
           'font-size': '1.4vw',
@@ -85,12 +79,10 @@ export default function AnalysisPanel(props: Props) {
               <For each={fingerRows}>
                 {(row) => (
                   <tr>
-                    <td style={{ border: '1px #555 solid', 'border-radius': '0.1vw', width: '20%' }}>
+                    <td class="border border-[#555] w-[20%]">
                       finger {row.left}:
                     </td>
-                    <td style={{
-                      border: '1px #555 solid',
-                      'border-radius': '0.1vw',
+                    <td class="border border-[#555]" style={{
                       width: '20%',
                       'background-color': statBgColor(
                         a()?.fingerUsage[row.left] ?? 0,
@@ -100,13 +92,10 @@ export default function AnalysisPanel(props: Props) {
                     }}>
                       {pct(a()?.fingerUsage[row.left] ?? 0, 2)}
                     </td>
-                    <td style={{ border: '1px #555 solid', 'border-radius': '0.1vw', width: '20%' }}>
+                    <td class="border border-[#555] w-[20%]">
                       finger {row.right}:
                     </td>
-                    <td style={{
-                      border: '1px #555 solid',
-                      'border-radius': '0.1vw',
-                      width: '20%',
+                    <td class="border border-[#555] w-[20%]" style={{
                       'background-color': statBgColor(
                         a()?.fingerUsage[row.right] ?? 0,
                         p()?.fingerUsage[row.right] ?? null,
@@ -123,18 +112,18 @@ export default function AnalysisPanel(props: Props) {
           <table style={{ 'font-size': '85%', margin: '2% auto' }}>
             <tbody>
               <tr>
-                <td style={{ width: '45%', 'font-weight': 'bold', 'text-align': 'center', border: 'none' }}>
+                  <td class="w-[45%] font-bold text-center border-none">
                   Left hand: {pct((a()?.fingerUsage['0'] ?? 0) + (a()?.fingerUsage['1'] ?? 0) + (a()?.fingerUsage['2'] ?? 0) + (a()?.fingerUsage['3'] ?? 0), 2)}
                 </td>
-                <td style={{ width: '45%', 'font-weight': 'bold', 'text-align': 'center', border: 'none' }}>
+                <td class="w-[45%] font-bold text-center border-none">
                   Right hand: {pct((a()?.fingerUsage['9'] ?? 0) + (a()?.fingerUsage['8'] ?? 0) + (a()?.fingerUsage['7'] ?? 0) + (a()?.fingerUsage['6'] ?? 0), 2)}
                 </td>
               </tr>
               <tr>
-                <td style={{ 'font-weight': 'bold', 'text-align': 'center', border: 'none' }}>
+                <td class="w-[45%] font-bold text-center border-none">
                   Left center: {pct(a()?.centerUsage.left ?? 0, 3)}
                 </td>
-                <td style={{ 'font-weight': 'bold', 'text-align': 'center', border: 'none' }}>
+                <td class="w-[45%] font-bold text-center border-none">
                   Right center: {pct(a()?.centerUsage.right ?? 0, 3)}
                 </td>
               </tr>
@@ -149,23 +138,19 @@ export default function AnalysisPanel(props: Props) {
               <For each={fingerRows}>
                 {(row) => (
                   <tr>
-                    <td style={{ border: '1px #555 solid', 'border-radius': '0.1vw', width: '20%' }}>
+                    <td class="border border-[#555] w-[20%]">
                       finger {row.left}:
                     </td>
-                    <td style={{
-                      border: '1px #555 solid',
-                      'border-radius': '0.1vw',
+                    <td class="border border-[#555]" style={{
                       width: '20%',
                       ...sfbCompareStyle(a()?.fingerSfb[row.left] ?? 0, p()?.fingerSfb[row.left] ?? null),
                     }}>
                       {pct(a()?.fingerSfb[row.left] ?? 0)}
                     </td>
-                    <td style={{ border: '1px #555 solid', 'border-radius': '0.1vw', width: '20%' }}>
+                    <td class="border border-[#555] w-[20%]">
                       finger {row.right}:
                     </td>
-                    <td style={{
-                      border: '1px #555 solid',
-                      'border-radius': '0.1vw',
+                    <td class="border border-[#555]" style={{
                       width: '20%',
                       ...sfbCompareStyle(a()?.fingerSfb[row.right] ?? 0, p()?.fingerSfb[row.right] ?? null),
                     }}>
@@ -180,7 +165,7 @@ export default function AnalysisPanel(props: Props) {
 
         {/* Right panel: trigram stats */}
         <div style={{
-          padding: '0.5vw',
+          padding: '1vw',
           'padding-top': '0.8vw',
           'background-color': '#444',
           'text-align': 'center',
@@ -204,7 +189,7 @@ export default function AnalysisPanel(props: Props) {
           <StatLine label="Invalid:" value={a()?.trigramFreqs.invalid ?? 0} prev={p()?.trigramFreqs.invalid ?? null} lowerIsBetter={false} bottomMargin />
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
