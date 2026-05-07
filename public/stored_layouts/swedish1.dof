@@ -12,8 +12,8 @@
 		]
 	},
 	"fingering": "traditional",
-	"languages": [
-		"swedish"
-	],
+	"languages": {
+		"swedish": 100
+	},
 	"year": 2022
 }

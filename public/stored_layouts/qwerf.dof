@@ -12,7 +12,7 @@
 		]
 	},
 	"fingering": "traditional",
-	"languages": [
-		"english"
-	]
+	"languages": {
+		"english": 100
+	}
 }

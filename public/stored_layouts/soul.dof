@@ -12,8 +12,8 @@
 		]
 	},
 	"fingering": "traditional",
-	"languages": [
-		"english"
-	],
+	"languages": {
+		"english": 100
+	},
 	"link": "kennetchaz.github.io/symmetric-typing/soul.html"
 }

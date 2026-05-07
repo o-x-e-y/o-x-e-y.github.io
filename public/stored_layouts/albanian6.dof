@@ -12,8 +12,8 @@
 		]
 	},
 	"fingering": "traditional",
-	"languages": [
-		"albanian"
-	],
+	"languages": {
+		"albanian": 100
+	},
 	"year": 2022
 }

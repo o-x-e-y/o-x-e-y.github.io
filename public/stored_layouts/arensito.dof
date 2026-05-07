@@ -12,9 +12,9 @@
 		]
 	},
 	"fingering": "traditional",
-	"languages": [
-		"english"
-	],
+	"languages": {
+		"english": 100
+	},
 	"year": 2004,
 	"link": "pvv.org/~hakonhal/main.cgi/keyboard"
 }

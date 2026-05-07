@@ -12,8 +12,8 @@
 		]
 	},
 	"fingering": "traditional",
-	"languages": [
-		"dutch"
-	],
+	"languages": {
+		"dutch": 100
+	},
 	"year": 2022
 }

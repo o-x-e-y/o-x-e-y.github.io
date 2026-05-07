@@ -12,9 +12,9 @@
 		]
 	},
 	"fingering": "traditional",
-	"languages": [
-		"english"
-	],
+	"languages": {
+		"english": 100
+	},
 	"year": 2016,
 	"link": "github.com/jackrosenthal/threelayout"
 }

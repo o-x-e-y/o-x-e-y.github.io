@@ -12,8 +12,8 @@
 		]
 	},
 	"fingering": "traditional",
-	"languages": [
-		"bokmal"
-	],
+	"languages": {
+		"bokmal": 100
+	},
 	"year": 2022
 }

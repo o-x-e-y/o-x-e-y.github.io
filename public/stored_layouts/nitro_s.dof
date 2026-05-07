@@ -12,8 +12,8 @@
 		]
 	},
 	"fingering": "traditional",
-	"languages": [
-		"English"
-	],
+	"languages": {
+		"English": 100
+	},
 	"year": 2022
 }

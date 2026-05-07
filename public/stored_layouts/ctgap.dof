@@ -12,9 +12,9 @@
 		]
 	},
 	"fingering": "traditional",
-	"languages": [
-		"english"
-	],
+	"languages": {
+		"english": 100
+	},
 	"year": 2021,
 	"link": "github.com/CTGAP/ctgap-keyboard-layout"
 }

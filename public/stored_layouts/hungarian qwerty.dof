@@ -12,7 +12,7 @@
 		]
 	},
 	"fingering": "traditional",
-	"languages": [
-		"hungarian"
-	]
+	"languages": {
+		"hungarian": 100
+	}
 }

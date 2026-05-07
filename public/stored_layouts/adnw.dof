@@ -12,9 +12,9 @@
 		]
 	},
 	"fingering": "traditional",
-	"languages": [
-		"german"
-	],
+	"languages": {
+		"german": 100
+	},
 	"year": 2010,
 	"link": "www.neo-layout.org/Layouts/"
 }

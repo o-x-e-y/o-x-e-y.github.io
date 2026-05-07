@@ -12,9 +12,9 @@
 		]
 	},
 	"fingering": "traditional",
-	"languages": [
-		"english"
-	],
+	"languages": {
+		"english": 100
+	},
 	"year": 2022,
 	"link": "o-x-e-y.github.io/layouts/crest/index.html"
 }

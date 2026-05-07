@@ -12,8 +12,8 @@
 		]
 	},
 	"fingering": "traditional",
-	"languages": [
-		"toki_pona"
-	],
+	"languages": {
+		"toki_pona": 100
+	},
 	"year": 2022
 }

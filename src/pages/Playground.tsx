@@ -52,20 +52,17 @@ const LANGUAGES: { label: string; value: string }[] = [
 ];
 
 function buildDefaultDof(layoutStr: string): Dof {
-  const rows = [layoutStr.slice(0, 10), layoutStr.slice(10, 20), layoutStr.slice(20, 30)];
-  const layerStr = rows.map((r) => [...r].join(" ")).join("\n");
+  const layerRows = [layoutStr.slice(0, 10), layoutStr.slice(10, 20), layoutStr.slice(20, 30)];
   return new Dof(
     JSON.stringify({
       name: "Custom",
       authors: [],
       board: "ortho",
-      layers: { main: layerStr },
-      fingering: [
-        ["LP", "LR", "LM", "LI", "LI", "RI", "RI", "RM", "RR", "RP"],
-        ["LP", "LR", "LM", "LI", "LI", "RI", "RI", "RM", "RR", "RP"],
-        ["LP", "LR", "LM", "LI", "LI", "RI", "RI", "RM", "RR", "RP"],
-      ],
-      languages: ["english"],
+      layers: { main: layerRows },
+      fingering: "traditional",
+      languages: {
+        "english": 100
+      },
     }),
   );
 }
