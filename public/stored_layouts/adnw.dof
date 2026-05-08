@@ -1,0 +1,20 @@
+{
+	"name": "AdNW",
+	"authors": [
+		"Various artists"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"k u ü . ä v g c l j",
+			"h i e a o d t r n s",
+			"x y ö , q b p w m z"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"german": 100
+	},
+	"year": 2010,
+	"link": "www.neo-layout.org/Layouts/"
+}

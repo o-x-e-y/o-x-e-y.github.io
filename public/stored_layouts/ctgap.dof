@@ -1,0 +1,20 @@
+{
+	"name": "CTGAP",
+	"authors": [
+		"Colby Chai"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"w c l d k j y o u /",
+			"r s t h m p n e i a",
+			"q v g f b z x ' , ."
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2021,
+	"link": "github.com/CTGAP/ctgap-keyboard-layout"
+}

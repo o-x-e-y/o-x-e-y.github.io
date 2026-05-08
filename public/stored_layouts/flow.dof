@@ -1,0 +1,19 @@
+{
+	"name": "flow",
+	"authors": [
+		"Ec0vid"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"v p h m z j f o u '",
+			"s n r t x y c e i a",
+			"q b l d k g w ; , ."
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2022
+}

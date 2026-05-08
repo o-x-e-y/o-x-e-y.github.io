@@ -1,0 +1,19 @@
+{
+	"name": "Soul",
+	"authors": [
+		"Kennet Chaz"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"q w l d p k m u y ;",
+			"a s r t g f n e i o",
+			"z x c v j b h , . /"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"link": "kennetchaz.github.io/symmetric-typing/soul.html"
+}

@@ -1,9 +1,0 @@
-{
-	"name": "Arensito", 
-	"author": "Håkon Hallingstad", 
-	"link": "pvv.org/~hakonhal/main.cgi/keyboard", 
-	"year": 2004, 
-	"for_language": "english", 
-	"layout": "ql.p';fudkarenbgsitozw,hjvcymx", 
-	"from_toml": true
-}

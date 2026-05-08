@@ -1,0 +1,19 @@
+{
+	"name": "Engram",
+	"authors": [
+		"Arno Klein"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"b y o u ' \" l d w v",
+			"c i e a , . h t s n",
+			"g x j k - ? r m f p"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2020
+}

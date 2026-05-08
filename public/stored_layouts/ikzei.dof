@@ -1,0 +1,19 @@
+{
+	"name": "ikzei",
+	"authors": [
+		"Oxey"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"; h ' . , b v l g j",
+			"a s e i x p d n t r",
+			"u f y o q z k w m c"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"dutch": 100
+	},
+	"year": 2022
+}

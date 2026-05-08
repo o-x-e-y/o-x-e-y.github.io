@@ -1,0 +1,20 @@
+{
+	"name": "TNWMLC",
+	"authors": [
+		"Martin Krzywinski"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"t n w m l c b p r h",
+			"s g x j f k q z v ;",
+			"e a d i o y u , . /"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2005,
+	"link": "mkweb.bcgsc.ca/carpalx/"
+}

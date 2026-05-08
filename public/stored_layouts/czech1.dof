@@ -1,0 +1,19 @@
+{
+	"name": "czech1",
+	"authors": [
+		"Oxey"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"' u o , f b p r c d",
+			"e i a * g h v n s t",
+			"w y x . ; m k l z j"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"czech": 100
+	},
+	"year": 2022
+}

@@ -1,0 +1,19 @@
+{
+	"name": "ruthenium",
+	"authors": [
+		"strongly+bryson"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"w d l f x q b u o y",
+			"r t h s g . n e a i",
+			"j k m c v z p ' , ;"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2023
+}

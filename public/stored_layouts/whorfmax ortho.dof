@@ -1,0 +1,19 @@
+{
+	"name": "Whorfmax Ortho",
+	"authors": [
+		"triple-a"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"f l h y z q w o u ,",
+			"s r n t p c d a e i",
+			"x j b v k m g ' ; ."
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2022
+}

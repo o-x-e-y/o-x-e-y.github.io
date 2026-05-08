@@ -1,0 +1,20 @@
+{
+	"name": "Vitrimak Ortho",
+	"authors": [
+		"semi"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"e . v i a c o q y t",
+			"s j / d g m p x , w",
+			"r k ' l n f u z b h"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2021,
+	"link": "semilin.github.io/other_layouts.html"
+}

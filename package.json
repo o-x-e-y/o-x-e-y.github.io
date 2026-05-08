@@ -20,12 +20,17 @@
     "tailwindcss": "^4.1.8",
     "typescript": "^5.7.2",
     "vite": "^6.0.0",
-    "vite-plugin-solid": "^2.11.6"
+    "vite-plugin-solid": "^2.11.6",
+    "vite-plugin-wasm": "^3.6.0"
   },
   "dependencies": {
     "@solidjs/router": "^0.16.1",
     "@thisbeyond/solid-dnd": "^0.7.5",
-    "libdof": "0.24.1",
+    "libdof": "0.24.2",
     "solid-js": "^1.9.5"
-  }
+  },
+  "prettier": {
+      "singleQuote": false,
+      "printWidth": 100
+    }
 }

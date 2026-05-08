@@ -1,0 +1,20 @@
+{
+	"name": "Hands Right",
+	"authors": [
+		"Oxey"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"v l c d k z ' u o y",
+			"n r s t g p h e a i",
+			"q x w m j b f , . ;"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2022,
+	"link": "o-x-e-y.github.io/layouts/hands_right/index.html"
+}

@@ -1,9 +1,0 @@
-{
-	"name": "Dvorak", 
-	"author": "August Dvorak", 
-	"link": "", 
-	"year": 1936, 
-	"for_language": "english", 
-	"layout": "',.pyfgcrlaoeuidhtns;qjkxbmwvz", 
-	"from_toml": true
-}

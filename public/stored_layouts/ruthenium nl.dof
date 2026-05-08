@@ -1,0 +1,19 @@
+{
+	"name": "ruthenium nl",
+	"authors": [
+		"bryson"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"w d l c x q p o u ,",
+			"r t n s g y h a e i",
+			"z k m b v j f ' ; ."
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2023
+}

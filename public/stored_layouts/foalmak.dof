@@ -1,0 +1,20 @@
+{
+	"name": "Foalmak",
+	"authors": [
+		"semi"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"b x , w v z / u t k",
+			"f o a l s n e i g h",
+			"p ' . m c q j y d r"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2021,
+	"link": "semilin.github.io/other_layouts.html"
+}

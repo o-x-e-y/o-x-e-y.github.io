@@ -1,0 +1,19 @@
+{
+	"name": "noctum",
+	"authors": [
+		"Oxey"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"b c d l z j f o u ,",
+			"n s t r v y h a e i",
+			"q w g m x k p ' ; ."
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2023
+}

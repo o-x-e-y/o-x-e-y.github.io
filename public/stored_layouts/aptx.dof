@@ -1,0 +1,20 @@
+{
+	"name": "APTx",
+	"authors": [
+		"Apsu"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"q c d w x z p o u ;",
+			"r s t n v y h e i a",
+			"l g b m j k f ' , ."
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2021,
+	"link": "github.com/apsu/aptx"
+}

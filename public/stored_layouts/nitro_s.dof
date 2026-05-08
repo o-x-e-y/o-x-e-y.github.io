@@ -1,0 +1,19 @@
+{
+	"name": "Nitro S",
+	"authors": [
+		"GalileoBlues"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"p m l d x v c o u ,",
+			"n t r h i b s a e i",
+			"z ; q f k w g ' ; ."
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"English": 100
+	},
+	"year": 2022
+}

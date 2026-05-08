@@ -1,0 +1,19 @@
+{
+	"name": "Swedish 1",
+	"authors": [
+		"Oxeylyzer"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"x h d g v z ' o å ö",
+			"n s t m k , r a e i",
+			"j . p b f c l ä u y"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"swedish": 100
+	},
+	"year": 2022
+}

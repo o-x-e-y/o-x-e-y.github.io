@@ -1,0 +1,19 @@
+{
+	"name": "Semimak JQC",
+	"authors": [
+		"Hertz"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"f l h v z ' w u o y",
+			"s r n t k g d e a i",
+			"x j b m q p c , . /"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2022
+}

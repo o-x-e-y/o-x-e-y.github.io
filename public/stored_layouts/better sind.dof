@@ -1,0 +1,19 @@
+{
+	"name": "better sind",
+	"authors": [
+		"Oxey"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"w y h k q x c o u ,",
+			"r s n t v f d a e i",
+			"z j l m g b p . / ;"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2022
+}

@@ -1,0 +1,20 @@
+{
+	"name": "Semimak JQ",
+	"authors": [
+		"semi"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"f l h v z ' w u o y",
+			"s r n t k c d e a i",
+			"x j b m q p g , . /"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2021,
+	"link": "semilin.github.io/semimak"
+}

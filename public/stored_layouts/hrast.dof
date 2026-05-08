@@ -1,0 +1,19 @@
+{
+	"name": "hrast",
+	"authors": [
+		"Oxey"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"f l c k q b w u o y",
+			"h r s t m p n e a i",
+			"j x g d v z . , ' /"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2022
+}

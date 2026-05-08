@@ -1,0 +1,20 @@
+{
+	"name": "Mine",
+	"authors": [
+		"Effchen"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"z l u a j w b d g y",
+			"c r i e o m n t h s",
+			"v x ü ä ö p f , . k"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"german": 100
+	},
+	"year": 2021,
+	"link": "neo-layout.org/Layouts/"
+}

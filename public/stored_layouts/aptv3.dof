@@ -1,0 +1,19 @@
+{
+	"name": "aptv3",
+	"authors": [
+		"Oxey"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"x c y d b q l u o ,",
+			"r s t h k j n e a i",
+			"w f g p v z m ; ' ."
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2022
+}

@@ -1,0 +1,20 @@
+{
+	"name": "Arensito",
+	"authors": [
+		"Håkon Hallingstad"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"q l . p ' ; f u d k",
+			"a r e n b g s i t o",
+			"z w , h j v c y m x"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2004,
+	"link": "pvv.org/~hakonhal/main.cgi/keyboard"
+}

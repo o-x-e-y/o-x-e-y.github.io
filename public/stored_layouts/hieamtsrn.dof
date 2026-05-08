@@ -1,0 +1,19 @@
+{
+	"name": "HIEAMTSRN",
+	"authors": [
+		"Sasha Viminitz"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"b y o u ' k d c l p",
+			"h i e a , m t s r n",
+			"x ( ) . ? w g f j z"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2014
+}

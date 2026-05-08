@@ -1,0 +1,19 @@
+{
+	"name": "Dvarf",
+	"authors": [
+		"Oxey"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"' u o w p q v d r f",
+			"a i e y g l h t n s",
+			", . ; c j k m b x z"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2021
+}

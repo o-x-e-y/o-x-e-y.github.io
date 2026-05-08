@@ -1,0 +1,19 @@
+{
+	"name": "workman2 dev2",
+	"authors": [
+		"Oxey"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"q l c m k j f u y ;",
+			"a r s t g b n e o i",
+			"z x w d v p h , . /"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2022
+}

@@ -1,0 +1,20 @@
+{
+	"name": "ColemaQ",
+	"authors": [
+		"nyfee"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"; w f p b j l u y q",
+			"a r s t g m n e i o",
+			"z x c d k v h / . ,"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2021,
+	"link": "colemaq.github.io/"
+}

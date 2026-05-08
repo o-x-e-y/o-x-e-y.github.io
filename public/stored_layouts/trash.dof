@@ -1,0 +1,19 @@
+{
+	"name": "trash",
+	"authors": [
+		"Oxey"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"b l c f k j w u o y",
+			"t r s h m p n e a i",
+			"q x g d v z . , ' /"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2022
+}

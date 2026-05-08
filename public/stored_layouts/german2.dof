@@ -1,0 +1,19 @@
+{
+	"name": "german2",
+	"authors": [
+		"Oxey"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"ö o u p j v b l f m",
+			"a e i t , k d n s r",
+			"ä ü . c y g h w z x"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"german": 100
+	},
+	"year": 2022
+}

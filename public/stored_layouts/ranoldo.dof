@@ -1,0 +1,19 @@
+{
+	"name": "ranoldo",
+	"authors": [
+		"Oxey"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"x . o c ' p k g l j",
+			"s i a e y z d t n r",
+			"b , ; u q v h m w f"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"dutch": 100
+	},
+	"year": 2022
+}

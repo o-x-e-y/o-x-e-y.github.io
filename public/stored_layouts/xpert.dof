@@ -1,0 +1,20 @@
+{
+	"name": "XPERT",
+	"authors": [
+		"Rika Maria Wedding"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"x p e r t y u i o j",
+			"q s d f n h a e l k",
+			"z w c v b g m , . /"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2003,
+	"link": "xpertkeyboard.com"
+}

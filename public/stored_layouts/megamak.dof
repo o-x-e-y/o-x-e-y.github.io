@@ -1,0 +1,19 @@
+{
+	"name": "Megamak",
+	"authors": [
+		"Smudge"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"x l c w k z f u o ;",
+			"y r s t m b n e a i",
+			"q j g d v p h ' , ."
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2022
+}

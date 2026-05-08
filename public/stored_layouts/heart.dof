@@ -1,0 +1,20 @@
+{
+	"name": "Heart",
+	"authors": [
+		"Heart"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"q c d v k j y o u ;",
+			"r s t h l p n a i e",
+			"w g b m x z f , . /"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2021,
+	"link": "github.com/mindhatch/heart"
+}

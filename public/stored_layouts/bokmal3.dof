@@ -1,0 +1,19 @@
+{
+	"name": "bokmal3",
+	"authors": [
+		"Oxey"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"y h u å ø w p l m b",
+			"i s e a æ f d r t n",
+			", . ; o ' g k j v c"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"bokmal": 100
+	},
+	"year": 2022
+}

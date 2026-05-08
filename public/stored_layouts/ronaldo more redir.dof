@@ -1,0 +1,19 @@
+{
+	"name": "ronaldo more redir",
+	"authors": [
+		"Oxey"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"f u ' . , p v l g j",
+			"s a e i q z d n t r",
+			"b ; y o x k h w m c"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"dutch": 100
+	},
+	"year": 2022
+}

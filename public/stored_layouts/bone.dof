@@ -1,0 +1,20 @@
+{
+	"name": "Bone",
+	"authors": [
+		"Effchen and Darnos"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"j d u a x p h l m w",
+			"c t i e o b n r s g",
+			"f v ü ä ö y z , . k"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"german": 100
+	},
+	"year": 2014,
+	"link": "neo-layout.org/Layouts/"
+}

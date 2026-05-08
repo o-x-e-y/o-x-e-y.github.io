@@ -1,0 +1,19 @@
+{
+	"name": "thallium rlv",
+	"authors": [
+		"bryson"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"f d h p v q l o u ,",
+			"s t n c y m r a e i",
+			"j k b g w z x ' ; ."
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2023
+}

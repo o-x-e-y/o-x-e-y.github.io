@@ -1,0 +1,18 @@
+{
+	"name": "BEAKL-15",
+	"authors": [
+		"Xay Voong"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"q h o u x g c r f z",
+			"y i e a . d s t n b",
+			"j / , k ' w m l p v"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	}
+}

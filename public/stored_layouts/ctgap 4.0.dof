@@ -1,0 +1,19 @@
+{
+	"name": "CTGAP 4.0",
+	"authors": [
+		"Colby Chai"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"q c l p v x k o u /",
+			"r s n t g y h e i a",
+			"z w m d b j f ' , ."
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2022
+}

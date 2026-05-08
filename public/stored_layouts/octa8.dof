@@ -1,0 +1,19 @@
+{
+	"name": "Octa8",
+	"authors": [
+		"Octahedron"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"y o u k x g w d l ,",
+			"i a e n f b s t r c",
+			"q / z h ' v p m j ."
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2021
+}

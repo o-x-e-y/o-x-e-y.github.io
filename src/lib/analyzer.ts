@@ -1,4 +1,7 @@
-import TRIGRAM_COMBINATIONS from './trigram_patterns';
+import TRIGRAM_COMBINATIONS from "./trigram_patterns";
+import type { Dof } from "./dof-utils";
+import type { Key } from "libdof";
+import { FINGER_LABELS, dofToLayoutString, dofToLayoutMap, dofFingerGroups } from "./dof-utils";
 
 export interface LanguageData {
   language: string;
@@ -32,7 +35,9 @@ export interface AnalysisResult {
 
 function getFingerUsage(finger: Set<string>, chars: Record<string, number>): number {
   let total = 0;
-  finger.forEach(k => { total += chars[k] ?? 0; });
+  finger.forEach((k) => {
+    total += chars[k] ?? 0;
+  });
   return total;
 }
 
@@ -46,15 +51,25 @@ function getSfbForFinger(finger: Set<string>, bigrams: Record<string, number>): 
   return total;
 }
 
-function getLsbs(layout: string, excludedKeys: Set<string>, bigrams: Record<string, number>): number {
+function getLsbs(
+  layout: string,
+  excludedKeys: Set<string>,
+  bigrams: Record<string, number>,
+): number {
   const map: Record<string, number> = {};
   for (let i = 0; i < 30; i++) {
     if (!excludedKeys.has(layout[i])) map[layout[i]] = i % 10;
   }
   let res = 0;
   for (const bg in bigrams) {
-    const a = map[bg[0]], b = map[bg[1]];
-    if ((a === 2 && b === 4) || (a === 4 && b === 2) || (a === 5 && b === 7) || (a === 7 && b === 5)) {
+    const a = map[bg[0]],
+      b = map[bg[1]];
+    if (
+      (a === 2 && b === 4) ||
+      (a === 4 && b === 2) ||
+      (a === 5 && b === 7) ||
+      (a === 7 && b === 5)
+    ) {
       res += bigrams[bg];
     }
   }
@@ -62,33 +77,70 @@ function getLsbs(layout: string, excludedKeys: Set<string>, bigrams: Record<stri
 }
 
 function getTrigramPattern(layoutMap: Record<string, number>, trigram: string): number {
-  const a = layoutMap[trigram[0]], b = layoutMap[trigram[1]], c = layoutMap[trigram[2]];
+  const a = layoutMap[trigram[0]],
+    b = layoutMap[trigram[1]],
+    c = layoutMap[trigram[2]];
   if (a === undefined || b === undefined || c === undefined) return -1;
   return TRIGRAM_COMBINATIONS[(a << 8) | (b << 4) | c];
 }
 
-function getTrigramStats(trigramData: Record<string, number>, layoutMap: Record<string, number>): TrigramFreqs {
-  const f: TrigramFreqs = { alternates: 0, alternatesSfs: 0, inrolls: 0, outrolls: 0, onehands: 0, redirects: 0, badRedirects: 0, other: 0, invalid: 0 };
+function getTrigramStats(
+  trigramData: Record<string, number>,
+  layoutMap: Record<string, number>,
+): TrigramFreqs {
+  const f: TrigramFreqs = {
+    alternates: 0,
+    alternatesSfs: 0,
+    inrolls: 0,
+    outrolls: 0,
+    onehands: 0,
+    redirects: 0,
+    badRedirects: 0,
+    other: 0,
+    invalid: 0,
+  };
   for (const tg in trigramData) {
     const freq = trigramData[tg];
     switch (getTrigramPattern(layoutMap, tg)) {
-      case 0: f.alternates += freq; break;
-      case 1: f.alternatesSfs += freq; break;
-      case 2: f.inrolls += freq; break;
-      case 3: f.outrolls += freq; break;
-      case 4: f.onehands += freq; break;
-      case 5: f.redirects += freq; break;
-      case 6: f.badRedirects += freq; break;
-      case 7: f.other += freq; break;
-      default: f.invalid += freq; break;
+      case 0:
+        f.alternates += freq;
+        break;
+      case 1:
+        f.alternatesSfs += freq;
+        break;
+      case 2:
+        f.inrolls += freq;
+        break;
+      case 3:
+        f.outrolls += freq;
+        break;
+      case 4:
+        f.onehands += freq;
+        break;
+      case 5:
+        f.redirects += freq;
+        break;
+      case 6:
+        f.badRedirects += freq;
+        break;
+      case 7:
+        f.other += freq;
+        break;
+      default:
+        f.invalid += freq;
+        break;
     }
   }
   return f;
 }
 
-export function analyzeLayout(layout: string, excludedKeys: Set<string>, ld: LanguageData): AnalysisResult {
+export function analyzeLayout(
+  layout: string,
+  excludedKeys: Set<string>,
+  ld: LanguageData,
+): AnalysisResult {
   const fingers: Record<string, Set<string>> = {
-    finger0: new Set([layout[0], layout[10], layout[20], '`']),
+    finger0: new Set([layout[0], layout[10], layout[20], "`"]),
     finger1: new Set([layout[1], layout[11], layout[21]]),
     finger2: new Set([layout[2], layout[12], layout[22]]),
     finger3: new Set([...layout.slice(3, 5), ...layout.slice(13, 15), ...layout.slice(23, 25)]),
@@ -99,12 +151,12 @@ export function analyzeLayout(layout: string, excludedKeys: Set<string>, ld: Lan
     thumbL: new Set([...layout.slice(30, 33)]),
     thumbR: new Set([...layout.slice(33, 36)]),
   };
-  for (const f in fingers) excludedKeys.forEach(k => fingers[f].delete(k));
+  for (const f in fingers) excludedKeys.forEach((k) => fingers[f].delete(k));
 
   const fingerUsage: Record<string, number> = {};
   const fingerSfb: Record<string, number> = {};
   for (const [key, finger] of Object.entries(fingers)) {
-    const shortKey = key.replace('finger', '');
+    const shortKey = key.replace("finger", "");
     fingerUsage[shortKey] = getFingerUsage(finger, ld.characters);
     fingerSfb[shortKey] = getSfbForFinger(finger, ld.bigrams);
   }
@@ -141,6 +193,64 @@ export function analyzeLayout(layout: string, excludedKeys: Set<string>, ld: Lan
   };
 }
 
+export function analyzeLayoutDof(
+  dof: Dof,
+  thumbKeys: string,
+  excludedChars: Set<string>,
+  ld: LanguageData,
+): AnalysisResult {
+  const shape = dof.shape() as number[];
+  const layer = dof.main_layer();
+  const groups = dofFingerGroups(dof, thumbKeys, excludedChars);
+
+  const fingerUsage: Record<string, number> = {};
+  const fingerSfb: Record<string, number> = {};
+  for (const [fi, chars] of Object.entries(groups)) {
+    const label = FINGER_LABELS[parseInt(fi)];
+    fingerUsage[label] = getFingerUsage(chars, ld.characters);
+    fingerSfb[label] = getSfbForFinger(chars, ld.bigrams);
+  }
+
+  const centerLeft = new Set<string>();
+  const centerRight = new Set<string>();
+  const homerow = new Set<string>();
+  for (let r = 0; r < shape.length; r++) {
+    const cols = shape[r];
+    const midL = Math.floor(cols / 2) - 1;
+    const midR = Math.floor(cols / 2);
+    const lch = (layer.get_key(r, midL) as Key | undefined)?.char_output();
+    const rch = (layer.get_key(r, midR) as Key | undefined)?.char_output();
+    if (lch) centerLeft.add(lch);
+    if (rch) centerRight.add(rch);
+    if (r === 1) {
+      for (let c = 0; c < cols; c++) {
+        if (c === midL || c === midR) continue;
+        const ch = (layer.get_key(1, c) as Key | undefined)?.char_output();
+        if (ch && !excludedChars.has(ch)) homerow.add(ch);
+      }
+    }
+  }
+
+  let dsfbTotal = 0;
+  for (const chars of Object.values(groups)) dsfbTotal += getSfbForFinger(chars, ld.skipgrams);
+
+  const layoutStr = dofToLayoutString(dof, thumbKeys);
+  const layoutMap = dofToLayoutMap(dof, thumbKeys, excludedChars);
+
+  return {
+    fingerUsage,
+    centerUsage: {
+      left: getFingerUsage(centerLeft, ld.characters),
+      right: getFingerUsage(centerRight, ld.characters),
+      homerow: getFingerUsage(homerow, ld.characters),
+    },
+    fingerSfb,
+    dsfbTotal,
+    lsbTotal: getLsbs(layoutStr, excludedChars, ld.bigrams),
+    trigramFreqs: getTrigramStats(ld.trigrams, layoutMap),
+  };
+}
+
 export function keyColor(prevalence: number): string {
   const color = prevalence * 30 + Math.log(prevalence * 120 + 1);
   const base = 95;
@@ -150,16 +260,16 @@ export function keyColor(prevalence: number): string {
 export function sfbCompareStyle(curr: number, prev: number | null): Record<string, string> {
   if (prev === null || Math.abs(curr - prev) < 0.00001) return {};
   return prev > curr
-    ? { 'border-color': '#080', 'background-color': '#454' }
-    : { 'border-color': '#a00', 'background-color': '#544' };
+    ? { "border-color": "#080", "background-color": "#454" }
+    : { "border-color": "#a00", "background-color": "#544" };
 }
 
 export function statBgColor(curr: number, prev: number | null, lowerIsBetter: boolean): string {
-  if (prev === null) return '';
+  if (prev === null) return "";
   let diff = (prev - curr) * 100;
   const absDiff = Math.abs(diff);
   if (lowerIsBetter) diff = -diff;
-  if (absDiff < 0.001) return '';
+  if (absDiff < 0.001) return "";
   const intensity = Math.min(68 + absDiff * (3 / curr), 175);
   return diff < -0.001
     ? `rgb(68, ${Math.round(intensity)}, 68)`

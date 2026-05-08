@@ -6,12 +6,26 @@ function is_alt(lh1: boolean, lh2: boolean, lh3: boolean): boolean {
   return lh1 !== lh2 && lh2 !== lh3;
 }
 
-function is_roll(lh1: boolean, lh2: boolean, lh3: boolean, c1: number, c2: number, c3: number): boolean {
+function is_roll(
+  lh1: boolean,
+  lh2: boolean,
+  lh3: boolean,
+  c1: number,
+  c2: number,
+  c3: number,
+): boolean {
   const r = Number(lh1) + Number(lh2) + Number(lh3);
   return !is_alt(lh1, lh2, lh3) && (r === 1 || r === 2) && c1 !== c2 && c2 !== c3;
 }
 
-function get_roll(lh1: boolean, lh2: boolean, lh3: boolean, c1: number, c2: number, c3: number): number {
+function get_roll(
+  lh1: boolean,
+  lh2: boolean,
+  lh3: boolean,
+  c1: number,
+  c2: number,
+  c3: number,
+): number {
   if (lh1 && lh2 && !lh3) return c2 > c1 ? 3 : 2;
   if (!lh1 && lh2 && lh3) return c3 > c2 ? 3 : 2;
   if (!lh1 && !lh2 && lh3) return c1 > c2 ? 3 : 2;

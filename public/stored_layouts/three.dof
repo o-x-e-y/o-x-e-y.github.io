@@ -1,0 +1,20 @@
+{
+	"name": "Three",
+	"authors": [
+		"Jack Rosenthal"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"q f u y z x k c w b",
+			"o h e a i d r t n s",
+			", m . j ; g l p v '"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2016,
+	"link": "github.com/jackrosenthal/threelayout"
+}

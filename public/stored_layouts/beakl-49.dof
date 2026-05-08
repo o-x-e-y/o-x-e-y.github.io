@@ -1,0 +1,18 @@
+{
+	"name": "BEAKL-49",
+	"authors": [
+		"Mati the Key"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"z y o u k g m l p j",
+			"h i e a f d s t n r",
+			"/ . , ' x w c v b q"
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	}
+}

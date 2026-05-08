@@ -1,0 +1,19 @@
+{
+	"name": "maya",
+	"authors": [
+		"lela"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"b l d g q j f o u ,",
+			"n r t s v k h a e i",
+			"z x m c w p y ' / ."
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2023
+}

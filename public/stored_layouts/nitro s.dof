@@ -1,0 +1,19 @@
+{
+	"name": "nitro s",
+	"authors": [
+		"bryson"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"p m l d x v c o u ,",
+			"n t r h y b s a e i",
+			"z q j f k w g ' ; ."
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2022
+}

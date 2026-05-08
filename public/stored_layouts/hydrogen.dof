@@ -1,0 +1,19 @@
+{
+	"name": "hydrogen",
+	"authors": [
+		"bryson"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"p m l d f w c o u ,",
+			"n t r h y b s a e i",
+			"z q j k x v g ' ; ."
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2022
+}

@@ -1,0 +1,19 @@
+{
+	"name": "whorf vz",
+	"authors": [
+		"whorf+bryson"
+	],
+	"board": "ortho",
+	"layers": {
+		"main": [
+			"f l h d v z y o u ,",
+			"s r n t m g c a e i",
+			"x j b k q p w ' ; ."
+		]
+	},
+	"fingering": "traditional",
+	"languages": {
+		"english": 100
+	},
+	"year": 2023
+}

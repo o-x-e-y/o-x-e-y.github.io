@@ -28,6 +28,7 @@
               bun
               pkg-config
               eslint
+              prettier
             ];
           };
       }
