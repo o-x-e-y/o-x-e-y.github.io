@@ -109,8 +109,8 @@ export default function PlaygroundKeyboard(props: Props) {
     if (!dof) return "?";
     const row = Math.floor(i / 10);
     const col = i % 10;
-    let key = (dof.main_layer().get_key(row, col) as Key | undefined);
-    return key?.char_output() ?? '~';
+    let key = dof.main_layer().get_key(row, col) as Key | undefined;
+    return key?.char_output() ?? "~";
   };
 
   const getKeyStyle = (i: number) => {
