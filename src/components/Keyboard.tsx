@@ -10,7 +10,6 @@ interface Props {
 }
 
 const GAP = 0.2;
-const Y_SCALE = 1.0;
 
 const key_css =
   "absolute border border-[#555] rounded-[12%] flex items-center justify-center select-none cursor-default touch-none";
@@ -18,7 +17,10 @@ const key_css =
 export default function Keyboard(props: Props) {
   const boardGeom = createMemo(() => {
     const rawBoard = props.dof.board() as PhysicalKey[][];
-    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    let minX = Infinity,
+      minY = Infinity,
+      maxX = -Infinity,
+      maxY = -Infinity;
     const board = rawBoard.map((row) =>
       row.map((pk) => ({ x: pk.x, y: pk.y, width: pk.width, height: pk.height })),
     );
@@ -32,8 +34,8 @@ export default function Keyboard(props: Props) {
     const dx = maxX - minX;
     const dy = maxY - minY;
     const kw = 100 / dx;
-    const ym = (dx / dy) * Y_SCALE;
-    const heightCss = dy * kw * Y_SCALE;
+    const ym = dx / dy;
+    const heightCss = dy * kw;
     const fontSizeCqw = kw / 2.5;
     return { kw, ym, heightCss, fontSizeCqw, minX, minY, board };
   });

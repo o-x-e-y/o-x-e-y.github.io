@@ -27,10 +27,7 @@ export function dofToLayoutString(dof: Dof): string {
   return dofMainChars(dof).join("");
 }
 
-export function dofToLayoutMap(
-  dof: Dof,
-  excludedChars: Set<string>,
-): Record<string, number> {
+export function dofToLayoutMap(dof: Dof, excludedChars: Set<string>): Record<string, number> {
   const map: Record<string, number> = {};
   const shape = dof.shape();
   const layer = dof.main_layer();
@@ -48,10 +45,7 @@ export function dofToLayoutMap(
   return map;
 }
 
-export function dofFingerGroups(
-  dof: Dof,
-  excludedChars: Set<string>,
-): Record<number, Set<string>> {
+export function dofFingerGroups(dof: Dof, excludedChars: Set<string>): Record<number, Set<string>> {
   const groups: Record<number, Set<string>> = {};
   for (let i = 0; i <= 9; i++) groups[i] = new Set();
 
