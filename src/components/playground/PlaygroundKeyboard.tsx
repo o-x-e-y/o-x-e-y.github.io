@@ -26,8 +26,6 @@ declare module "solid-js" {
 interface Props {
   dof: Accessor<Dof | null>;
   setDof: Setter<Dof | null>;
-  thumbKeys: Accessor<string>;
-  setThumbKeys: Setter<string>;
   excludedIndices: Accessor<Set<number>>;
   setExcludedIndices: Setter<Set<number>>;
   languageData: Accessor<LanguageData | null>;
@@ -134,8 +132,6 @@ export default function PlaygroundKeyboard(props: Props) {
     const dof = props.dof();
     if (!dof) return "?";
     const shape = Array.from(dof.shape());
-    const total = totalMainKeys(shape);
-    if (i >= total) return props.thumbKeys()[i - total] ?? "";
     const [row, col] = flatToRowCol(i, shape);
     return (dof.main_layer().get_key(row, col) as Key | undefined)?.char_output() ?? "~";
   };
@@ -173,20 +169,11 @@ export default function PlaygroundKeyboard(props: Props) {
     const si = draggable.id;
     const ei = droppable.id;
     const dof = props.dof();
-    const shape = dof ? (Array.from(dof.shape())) : [];
-    const total = totalMainKeys(shape);
-
-    if (si < total && ei < total) {
-      const [sr, sc] = flatToRowCol(si, shape);
-      const [er, ec] = flatToRowCol(ei, shape);
-      props.setDof((prev) => (prev ? swapAndRebuild(prev, sr, sc, er, ec) : prev));
-    } else if (si >= total && ei >= total) {
-      props.setThumbKeys((prev) => {
-        const arr = [...prev];
-        [arr[si - total], arr[ei - total]] = [arr[ei - total], arr[si - total]];
-        return arr.join("");
-      });
-    }
+    if (!dof) return;
+    const shape = Array.from(dof.shape());
+    const [sr, sc] = flatToRowCol(si, shape);
+    const [er, ec] = flatToRowCol(ei, shape);
+    props.setDof((prev) => (prev ? swapAndRebuild(prev, sr, sc, er, ec) : prev));
 
     props.setExcludedIndices((prev) => {
       const startEx = prev.has(si);
@@ -227,57 +214,36 @@ export default function PlaygroundKeyboard(props: Props) {
               const shape = Array.from(props.dof()!.shape());
               const total = totalMainKeys(shape);
               return (
-                <>
-                  <div
-                    class="relative w-full"
-                    style={{
-                      "aspect-ratio": `100 / ${geom().heightCss}`,
-                      "font-size": `${geom().fontSizeCqw.toFixed(2)}cqw`,
-                      "line-height": "0",
-                    }}
-                  >
-                    <For each={geom().board}>
-                      {(row, ri) => (
-                        <For each={row}>
-                          {(pk, ci) => {
-                            const { kw, ym, minX, minY } = geom();
-                            const flatIdx = rowColToFlat(ri(), ci(), shape);
-                            return (
-                              <div
-                                class="absolute"
-                                style={{
-                                  left: `${(pk.x - minX) * kw + GAP}%`,
-                                  top: `${(pk.y - minY) * kw * ym + GAP * ym}%`,
-                                  width: `${pk.width * kw - GAP * 2}%`,
-                                  height: `${(pk.height * kw - GAP * 2) * ym}%`,
-                                }}
-                              >
-                                {renderKey(flatIdx)}
-                              </div>
-                            );
+                <div
+                  class="relative w-full"
+                  style={{
+                    "aspect-ratio": `100 / ${geom().heightCss}`,
+                    "font-size": `${geom().fontSizeCqw.toFixed(2)}cqw`,
+                    "line-height": "0",
+                  }}
+                >
+                  <For each={Array.from({ length: total }, (_, i) => i)}>
+                    {(flatIdx) => {
+                      const { kw, ym, minX, minY } = geom();
+                      const [r, c] = flatToRowCol(flatIdx, shape);
+                      const pk = geom().board[r]?.[c];
+                      if (!pk) return null;
+                      return (
+                        <div
+                          class="absolute"
+                          style={{
+                            left: `${(pk.x - minX) * kw + GAP}%`,
+                            top: `${(pk.y - minY) * kw * ym + GAP * ym}%`,
+                            width: `${pk.width * kw - GAP * 2}%`,
+                            height: `${(pk.height * kw - GAP * 2) * ym}%`,
                           }}
-                        </For>
-                      )}
-                    </For>
-                  </div>
-                  {/* Thumb row */}
-                  <div
-                    class="grid grid-cols-11 gap-[0.4cqw] mt-[0.4cqw]"
-                    style={{ "font-size": `${geom().fontSizeCqw.toFixed(2)}cqw`, "line-height": "0" }}
-                  >
-                    <div />
-                    <div />
-                    {renderKey(total + 0)}
-                    {renderKey(total + 1)}
-                    {renderKey(total + 2)}
-                    <div />
-                    {renderKey(total + 3)}
-                    {renderKey(total + 4)}
-                    {renderKey(total + 5)}
-                    <div />
-                    <div />
-                  </div>
-                </>
+                        >
+                          {renderKey(flatIdx)}
+                        </div>
+                      );
+                    }}
+                  </For>
+                </div>
               );
             }}
           </Show>

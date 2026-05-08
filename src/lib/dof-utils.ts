@@ -3,8 +3,6 @@ import type { Key } from "libdof";
 
 export { Dof } from "libdof";
 
-export const DEFAULT_THUMB_KEYS = "=/␣⇑↻-";
-
 export const FINGER_LABELS: Record<number, string> = {
   [Finger.LP]: "0",
   [Finger.LR]: "1",
@@ -25,13 +23,12 @@ export function dofMainChars(dof: Dof): string[] {
     .map((k) => k.char_output() ?? "~");
 }
 
-export function dofToLayoutString(dof: Dof, thumbKeys: string): string {
-  return dofMainChars(dof).join("") + thumbKeys;
+export function dofToLayoutString(dof: Dof): string {
+  return dofMainChars(dof).join("");
 }
 
 export function dofToLayoutMap(
   dof: Dof,
-  thumbKeys: string,
   excludedChars: Set<string>,
 ): Record<string, number> {
   const map: Record<string, number> = {};
@@ -48,19 +45,11 @@ export function dofToLayoutMap(
     }
   }
 
-  for (let i = 0; i < 3; i++) {
-    const lch = thumbKeys[i];
-    const rch = thumbKeys[i + 3];
-    if (lch && !excludedChars.has(lch)) map[lch] = Finger.LT;
-    if (rch && !excludedChars.has(rch)) map[rch] = Finger.RT;
-  }
-
   return map;
 }
 
 export function dofFingerGroups(
   dof: Dof,
-  thumbKeys: string,
   excludedChars: Set<string>,
 ): Record<number, Set<string>> {
   const groups: Record<number, Set<string>> = {};
@@ -81,13 +70,6 @@ export function dofFingerGroups(
 
   // Backtick is conventionally included with LP (left pinky), matching original analyzer behavior
   groups[Finger.LP].add("`");
-
-  for (let i = 0; i < 3; i++) {
-    const lch = thumbKeys[i];
-    const rch = thumbKeys[i + 3];
-    if (lch && !excludedChars.has(lch)) groups[Finger.LT].add(lch);
-    if (rch && !excludedChars.has(rch)) groups[Finger.RT].add(rch);
-  }
 
   return groups;
 }

@@ -4,10 +4,10 @@ import LayoutSearch from "../components/playground/LayoutSearch";
 import AnalysisPanel from "../components/playground/AnalysisPanel";
 import { analyzeLayoutDof } from "../lib/analyzer";
 import type { LanguageData, AnalysisResult } from "../lib/analyzer";
-import { Dof, dofToLayoutString, DEFAULT_THUMB_KEYS } from "../lib/dof-utils";
+import { Dof, dofToLayoutString } from "../lib/dof-utils";
 import HomeButton from "../components/HomeButton";
 
-const DEFAULT_LAYOUT_STRING = "vmlcpqfoujstrdy.naeizkxgwbh';,";
+const DEFAULT_LAYOUT_STRING = "vmlcpqfoujstrdy.naeizkxgwbh';,=/␣⇑↻-";
 
 const LANGUAGES: { label: string; value: string }[] = [
   { label: "English", value: "english" },
@@ -51,8 +51,14 @@ const LANGUAGES: { label: string; value: string }[] = [
 ];
 
 function buildDefaultDof(layoutStr: string): Dof {
-  const rowStrs = [layoutStr.slice(0, 10), layoutStr.slice(10, 20), layoutStr.slice(20, 30)];
-  const layerRows = rowStrs.map((s) => s.split("").join(" "));
+  const mainStr = layoutStr.slice(0, 30);
+  const thumbStr = layoutStr.slice(30, 36);
+  const layerRows = [
+    mainStr.slice(0, 10).split("").join(" "),
+    mainStr.slice(10, 20).split("").join(" "),
+    mainStr.slice(20, 30).split("").join(" "),
+    [...thumbStr].join(" "),
+  ];
   return new Dof(
     JSON.stringify({
       name: "Custom",
@@ -60,27 +66,23 @@ function buildDefaultDof(layoutStr: string): Dof {
       board: "ortho",
       layers: { main: layerRows },
       fingering: "traditional",
-      languages: {
-        english: 100,
-      },
+      languages: { english: 100 },
     }),
   );
 }
 
 export default function Playground() {
   const [dof, setDof] = createSignal<Dof | null>(null);
-  const [thumbKeys, setThumbKeys] = createSignal(DEFAULT_THUMB_KEYS);
   const [excludedIndices, setExcludedIndices] = createSignal(new Set<number>());
   const [languageData, setLanguageDataSignal] = createSignal<LanguageData | null>(null);
   const [language, setLanguage] = createSignal("english");
 
   const excludedChars = createMemo(() => {
     const d = dof();
-    const tk = thumbKeys();
     const excl = excludedIndices();
     const chars = new Set<string>();
     if (!d) return chars;
-    const mainStr = dofToLayoutString(d, tk);
+    const mainStr = dofToLayoutString(d);
     for (const i of excl) {
       if (mainStr[i]) chars.add(mainStr[i]);
     }
@@ -91,7 +93,7 @@ export default function Playground() {
     const d = dof();
     const ld = languageData();
     if (!d || !ld) return null;
-    return analyzeLayoutDof(d, thumbKeys(), excludedChars(), ld);
+    return analyzeLayoutDof(d, excludedChars(), ld);
   });
 
   const [prevAnalysis, setPrevAnalysis] = createSignal<AnalysisResult | null>(null);
@@ -101,49 +103,35 @@ export default function Playground() {
     }),
   );
 
-  const loadLanguage = (lang: string, newDof?: Dof, newThumbKeys?: string) => {
+  const loadLanguage = (lang: string, newDof?: Dof) => {
     const ld = languageData();
     const currentDof = dof();
-    const currentThumb = thumbKeys();
 
     fetch(`/data/${lang}.json`)
       .then((r) => r.json())
       .then((data: LanguageData) => {
         let convertedDof: Dof;
-        let convertedThumb: string;
 
         if (newDof !== undefined) {
-          // Imported layout: convert canonical chars through language conversion map
           convertedDof = newDof;
-          convertedThumb = newThumbKeys ?? currentThumb;
-          convertedThumb = [...convertedThumb].map((c) => data.convert[c] ?? c).join("");
         } else if (ld && currentDof) {
-          // Language switch: reverse-convert current layout then apply new language map
+          // Language switch: reverse-convert current main chars then apply new language map
           const back: Record<string, string> = {};
           for (const [k, v] of Object.entries(ld.convert)) back[v] = k;
-          const mainStr = dofToLayoutString(currentDof, currentThumb).slice(0, 30);
-          const convertedStr = [...mainStr]
-            .map((c) => {
-              const reverted = back[c] ?? c;
-              return data.convert[reverted] ?? reverted;
-            })
+          const fullStr = dofToLayoutString(currentDof);
+          const convertedMain = fullStr
+            .slice(0, 30)
+            .split("")
+            .map((c) => data.convert[back[c] ?? c] ?? back[c] ?? c)
             .join("");
-          convertedDof = buildDefaultDof(convertedStr);
-          convertedThumb = [...currentThumb]
-            .map((c) => {
-              const reverted = back[c] ?? c;
-              return data.convert[reverted] ?? reverted;
-            })
-            .join("");
+          convertedDof = buildDefaultDof(convertedMain + fullStr.slice(30));
         } else {
           convertedDof = currentDof ?? buildDefaultDof(DEFAULT_LAYOUT_STRING);
-          convertedThumb = currentThumb;
         }
 
         batch(() => {
           setLanguageDataSignal(data);
           setDof(convertedDof);
-          setThumbKeys(convertedThumb);
           setLanguage(lang);
         });
       })
@@ -159,11 +147,11 @@ export default function Playground() {
   const copyLayout = () => {
     const d = dof();
     if (!d) return;
-    const fullStr = dofToLayoutString(d, thumbKeys());
+    const fullStr = dofToLayoutString(d);
     const excl = excludedIndices();
     let text = "";
-    for (let i = 0; i < 36; i++) {
-      if (!excl.has(i)) text += fullStr[i] ?? "";
+    for (let i = 0; i < fullStr.length; i++) {
+      if (!excl.has(i)) text += fullStr[i];
     }
     navigator.clipboard.writeText(text);
   };
@@ -178,8 +166,6 @@ export default function Playground() {
         <PlaygroundKeyboard
           dof={dof}
           setDof={setDof}
-          thumbKeys={thumbKeys}
-          setThumbKeys={setThumbKeys}
           excludedIndices={excludedIndices}
           setExcludedIndices={setExcludedIndices}
           languageData={languageData}
@@ -207,7 +193,7 @@ export default function Playground() {
           >
             <For each={LANGUAGES}>{(lang) => <option value={lang.value}>{lang.label}</option>}</For>
           </select>
-          <LayoutSearch onSelect={(d, tk, lang) => loadLanguage(lang, d, tk)} />
+          <LayoutSearch onSelect={(d, lang) => loadLanguage(lang, d)} />
         </div>
         <AnalysisPanel analysis={analysis} prevAnalysis={prevAnalysis} />
       </article>

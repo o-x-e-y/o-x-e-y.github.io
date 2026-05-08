@@ -1,10 +1,10 @@
 import { createSignal, For, Show } from "solid-js";
 import layout_names from "../../data/layout_names";
-import { Dof, dofMainChars, DEFAULT_THUMB_KEYS } from "../../lib/dof-utils";
+import { Dof } from "../../lib/dof-utils";
 import { Language } from "libdof";
 
 interface Props {
-  onSelect: (_dof: Dof, _thumbKeys: string, _language: string) => void;
+  onSelect: (_dof: Dof, _language: string) => void;
 }
 
 function* getTrigrams(str: string): Generator<string> {
@@ -47,7 +47,7 @@ export default function LayoutSearch(props: Props) {
     const text = await res.text();
     const dof = new Dof(text);
     const language = (dof.languages() as Language[])[0];
-    props.onSelect(dof, DEFAULT_THUMB_KEYS, language.language);
+    props.onSelect(dof, language.language);
   };
 
   return (

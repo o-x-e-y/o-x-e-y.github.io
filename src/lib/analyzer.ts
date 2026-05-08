@@ -195,13 +195,12 @@ export function analyzeLayout(
 
 export function analyzeLayoutDof(
   dof: Dof,
-  thumbKeys: string,
   excludedChars: Set<string>,
   ld: LanguageData,
 ): AnalysisResult {
   const shape = dof.shape() as number[];
   const layer = dof.main_layer();
-  const groups = dofFingerGroups(dof, thumbKeys, excludedChars);
+  const groups = dofFingerGroups(dof, excludedChars);
 
   const fingerUsage: Record<string, number> = {};
   const fingerSfb: Record<string, number> = {};
@@ -234,8 +233,8 @@ export function analyzeLayoutDof(
   let dsfbTotal = 0;
   for (const chars of Object.values(groups)) dsfbTotal += getSfbForFinger(chars, ld.skipgrams);
 
-  const layoutStr = dofToLayoutString(dof, thumbKeys);
-  const layoutMap = dofToLayoutMap(dof, thumbKeys, excludedChars);
+  const layoutStr = dofToLayoutString(dof);
+  const layoutMap = dofToLayoutMap(dof, excludedChars);
 
   return {
     fingerUsage,
