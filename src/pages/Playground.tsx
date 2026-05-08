@@ -52,7 +52,8 @@ const LANGUAGES: { label: string; value: string }[] = [
 ];
 
 function buildDefaultDof(layoutStr: string): Dof {
-  const layerRows = [layoutStr.slice(0, 10), layoutStr.slice(10, 20), layoutStr.slice(20, 30)];
+  const rowStrs = [layoutStr.slice(0, 10), layoutStr.slice(10, 20), layoutStr.slice(20, 30)];
+  const layerRows = rowStrs.map(s => s.split("").join(" "))
   return new Dof(
     JSON.stringify({
       name: "Custom",
@@ -139,7 +140,7 @@ export default function Playground() {
           convertedDof = currentDof ?? buildDefaultDof(DEFAULT_LAYOUT_STRING);
           convertedThumb = currentThumb;
         }
-
+        
         batch(() => {
           setLanguageDataSignal(data);
           setDof(convertedDof);
