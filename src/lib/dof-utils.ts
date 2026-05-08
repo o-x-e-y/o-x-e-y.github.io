@@ -101,3 +101,22 @@ export async function loadDof(name: string): Promise<Dof> {
   const text = await res.text();
   return new Dof(text);
 }
+
+export function totalMainKeys(shape: number[]): number {
+  return shape.reduce((s, n) => s + n, 0);
+}
+
+export function flatToRowCol(i: number, shape: number[]): [number, number] {
+  let rem = i;
+  for (let r = 0; r < shape.length; r++) {
+    if (rem < shape[r]) return [r, rem];
+    rem -= shape[r];
+  }
+  return [shape.length - 1, 0];
+}
+
+export function rowColToFlat(r: number, c: number, shape: number[]): number {
+  let i = 0;
+  for (let row = 0; row < r; row++) i += shape[row];
+  return i + c;
+}

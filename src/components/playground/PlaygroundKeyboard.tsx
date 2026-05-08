@@ -1,4 +1,4 @@
-import { For, onCleanup } from "solid-js";
+import { For, Show, createMemo, onCleanup } from "solid-js";
 import type { Accessor, Setter } from "solid-js";
 import {
   DragDropProvider,
@@ -8,8 +8,8 @@ import {
 } from "@thisbeyond/solid-dnd";
 import { keyColor } from "../../lib/analyzer";
 import type { LanguageData } from "../../lib/analyzer";
-import { Dof, swapAndRebuild } from "../../lib/dof-utils";
-import type { Key } from "libdof";
+import { Dof, swapAndRebuild, flatToRowCol, rowColToFlat, totalMainKeys } from "../../lib/dof-utils";
+import type { Key, PhysicalKey } from "libdof";
 
 // Teach TypeScript about use:draggable / use:droppable directives
 /* eslint-disable no-unused-vars */
@@ -34,8 +34,10 @@ interface Props {
   onCopyLayout: () => void;
 }
 
+const GAP = 0.2;
+
 const key_css =
-  "border border-[#555] rounded-[1.4cqw] text-center select-none pt-[2.8cqw] pb-[3.6cqw] cursor-default touch-none";
+  "w-full h-full border border-[#555] rounded-[12%] flex items-center justify-center select-none cursor-default touch-none";
 
 interface KeyTileProps {
   index: number;
@@ -103,14 +105,38 @@ const KeyTile = (props: KeyTileProps) => {
 };
 
 export default function PlaygroundKeyboard(props: Props) {
+  const boardGeom = createMemo(() => {
+    const dof = props.dof();
+    if (!dof) return null;
+    const rawBoard = dof.board() as PhysicalKey[][];
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    const board = rawBoard.map((row) =>
+      row.map((pk) => ({ x: pk.x, y: pk.y, width: pk.width, height: pk.height })),
+    );
+    for (const row of board)
+      for (const k of row) {
+        minX = Math.min(minX, k.x);
+        minY = Math.min(minY, k.y);
+        maxX = Math.max(maxX, k.x + k.width);
+        maxY = Math.max(maxY, k.y + k.height);
+      }
+    const dx = maxX - minX;
+    const dy = maxY - minY;
+    const kw = 100 / dx;
+    const ym = dx / dy;
+    const heightCss = dy * kw;
+    const fontSizeCqw = kw / 2.5;
+    return { kw, ym, heightCss, fontSizeCqw, minX, minY, board };
+  });
+
   const getKeyChar = (i: number): string => {
     const dof = props.dof();
-    if (i >= 30) return props.thumbKeys()[i - 30] ?? "";
     if (!dof) return "?";
-    const row = Math.floor(i / 10);
-    const col = i % 10;
-    let key = dof.main_layer().get_key(row, col) as Key | undefined;
-    return key?.char_output() ?? "~";
+    const shape = Array.from(dof.shape());
+    const total = totalMainKeys(shape);
+    if (i >= total) return props.thumbKeys()[i - total] ?? "";
+    const [row, col] = flatToRowCol(i, shape);
+    return (dof.main_layer().get_key(row, col) as Key | undefined)?.char_output() ?? "~";
   };
 
   const getKeyStyle = (i: number) => {
@@ -145,17 +171,18 @@ export default function PlaygroundKeyboard(props: Props) {
     if (!droppable || draggable.id === droppable.id) return;
     const si = draggable.id;
     const ei = droppable.id;
+    const dof = props.dof();
+    const shape = dof ? (Array.from(dof.shape())) : [];
+    const total = totalMainKeys(shape);
 
-    if (si < 30 && ei < 30) {
-      const sr = Math.floor(si / 10),
-        sc = si % 10;
-      const er = Math.floor(ei / 10),
-        ec = ei % 10;
+    if (si < total && ei < total) {
+      const [sr, sc] = flatToRowCol(si, shape);
+      const [er, ec] = flatToRowCol(ei, shape);
       props.setDof((prev) => (prev ? swapAndRebuild(prev, sr, sc, er, ec) : prev));
-    } else if (si >= 30 && ei >= 30) {
+    } else if (si >= total && ei >= total) {
       props.setThumbKeys((prev) => {
         const arr = [...prev];
-        [arr[si - 30], arr[ei - 30]] = [arr[ei - 30], arr[si - 30]];
+        [arr[si - total], arr[ei - total]] = [arr[ei - total], arr[si - total]];
         return arr.join("");
       });
     }
@@ -194,32 +221,65 @@ export default function PlaygroundKeyboard(props: Props) {
           style={{ "container-type": "inline-size" }}
           onClick={props.onCopyLayout}
         >
-          <div
-            class="grid grid-cols-11 gap-[0.4cqw]"
-            style={{ "font-size": "4.2cqw", "line-height": "0" }}
-          >
-            <For each={[0, 1, 2]}>
-              {(row) => (
+          <Show when={boardGeom()}>
+            {(geom) => {
+              const shape = Array.from(props.dof()!.shape());
+              const total = totalMainKeys(shape);
+              return (
                 <>
-                  <For each={[0, 1, 2, 3, 4]}>{(col) => renderKey(row * 10 + col)}</For>
-                  <div />
-                  <For each={[5, 6, 7, 8, 9]}>{(col) => renderKey(row * 10 + col)}</For>
+                  <div
+                    class="relative w-full"
+                    style={{
+                      "aspect-ratio": `100 / ${geom().heightCss}`,
+                      "font-size": `${geom().fontSizeCqw.toFixed(2)}cqw`,
+                      "line-height": "0",
+                    }}
+                  >
+                    <For each={geom().board}>
+                      {(row, ri) => (
+                        <For each={row}>
+                          {(pk, ci) => {
+                            const { kw, ym, minX, minY } = geom();
+                            const flatIdx = rowColToFlat(ri(), ci(), shape);
+                            return (
+                              <div
+                                class="absolute"
+                                style={{
+                                  left: `${(pk.x - minX) * kw + GAP}%`,
+                                  top: `${(pk.y - minY) * kw * ym + GAP * ym}%`,
+                                  width: `${pk.width * kw - GAP * 2}%`,
+                                  height: `${(pk.height * kw - GAP * 2) * ym}%`,
+                                }}
+                              >
+                                {renderKey(flatIdx)}
+                              </div>
+                            );
+                          }}
+                        </For>
+                      )}
+                    </For>
+                  </div>
+                  {/* Thumb row */}
+                  <div
+                    class="grid grid-cols-11 gap-[0.4cqw] mt-[0.4cqw]"
+                    style={{ "line-height": "0" }}
+                  >
+                    <div />
+                    <div />
+                    {renderKey(total + 0)}
+                    {renderKey(total + 1)}
+                    {renderKey(total + 2)}
+                    <div />
+                    {renderKey(total + 3)}
+                    {renderKey(total + 4)}
+                    {renderKey(total + 5)}
+                    <div />
+                    <div />
+                  </div>
                 </>
-              )}
-            </For>
-            {/* Thumb row */}
-            <div />
-            <div />
-            {renderKey(30)}
-            {renderKey(31)}
-            {renderKey(32)}
-            <div />
-            {renderKey(33)}
-            {renderKey(34)}
-            {renderKey(35)}
-            <div />
-            <div />
-          </div>
+              );
+            }}
+          </Show>
         </div>
       </DragDropSensors>
     </DragDropProvider>
