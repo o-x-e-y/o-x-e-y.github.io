@@ -36,7 +36,7 @@ export default function Keyboard(props: Props) {
     const kw = 100 / dx;
     const ym = dx / dy;
     const heightCss = dy * kw;
-    const fontSizeCqw = kw / 2.5;
+    const fontSizeCqw = kw / 2.25;
     return { kw, ym, heightCss, fontSizeCqw, minX, minY, board };
   });
 
@@ -55,7 +55,7 @@ export default function Keyboard(props: Props) {
 
   return (
     <div
-      class="mx-auto w-full max-w-2xl bg-[#444] rounded-[1.5cqw] p-[0.8cqw] overflow-hidden"
+      class="mx-auto w-full max-w-lg bg-[#444] rounded-[1.5cqw] p-[0.8cqw] overflow-hidden"
       style={{ "container-type": "inline-size" }}
     >
       <div
