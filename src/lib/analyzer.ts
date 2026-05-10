@@ -198,7 +198,7 @@ export function analyzeLayoutDof(
   excludedChars: Set<string>,
   ld: LanguageData,
 ): AnalysisResult {
-  const shape = dof.shape() as number[];
+  const shape = dof.shape();
   const layer = dof.main_layer();
   const groups = dofFingerGroups(dof, excludedChars);
 
