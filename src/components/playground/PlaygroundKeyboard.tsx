@@ -5,6 +5,7 @@ import {
   DragDropSensors,
   createDraggable,
   createDroppable,
+  useDragDropContext,
 } from "@thisbeyond/solid-dnd";
 import { keyColor } from "../../lib/analyzer";
 import type { LanguageData } from "../../lib/analyzer";
@@ -236,6 +237,7 @@ export default function PlaygroundKeyboard(props: Props) {
                       const [r, c] = flatToRowCol(flatIdx, shape);
                       const pk = geom().board[r]?.[c];
                       if (!pk) return null;
+                      const [dndState] = useDragDropContext()!;
                       return (
                         <div
                           class="absolute"
@@ -244,6 +246,8 @@ export default function PlaygroundKeyboard(props: Props) {
                             top: `${(pk.y - minY) * kw * ym + GAP * ym}%`,
                             width: `${pk.width * kw - GAP * 2}%`,
                             height: `${(pk.height * kw - GAP * 2) * ym}%`,
+                            opacity: dndState.active.draggable?.id === flatIdx ? "0.8" : "1.0",
+                            "z-index": dndState.active.draggable?.id === flatIdx ? "10" : "auto",
                           }}
                         >
                           {renderKey(flatIdx)}
