@@ -162,7 +162,7 @@ export default function Playground() {
       <header>
         <h1>Layout Playground</h1>
       </header>
-      <article style={{ "max-width": "72rem" }}>
+      <article style={{ "max-width": "80vw" }}>
         <PlaygroundKeyboard
           dof={dof}
           setDof={setDof}
@@ -172,7 +172,7 @@ export default function Playground() {
           onCopyLayout={copyLayout}
         />
         <div
-          class="my-1 sm:mb-2 sm:mt-3"
+          class="my-1 sm:mb-2 sm:mt-2"
           style={{
             "text-align": "center",
             display: "flex",
@@ -184,11 +184,13 @@ export default function Playground() {
             value={language()}
             onChange={(e) => loadLanguage(e.currentTarget.value)}
             style={{
+              "padding": "1px",
+              "padding-left": "4px",
               "font-size": "100%",
               color: "#ddd",
               "background-color": "#333",
               border: "#ddd 1px solid",
-              "border-radius": "0.2vw",
+              "border-radius": "0.1vw",
             }}
           >
             <For each={LANGUAGES}>{(lang) => <option value={lang.value}>{lang.label}</option>}</For>

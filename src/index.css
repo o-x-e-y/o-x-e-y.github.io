@@ -6,7 +6,7 @@
   --font-jetbrains: "JetBrains Mono", monospace;
   --font-roboto-mono: "Roboto Mono", monospace;
 
-  --color-background: #1d2021;
+  --color-background: #222;
   --color-foreground: #fbf1c7;
   --color-bright-foreground: #fbf1c7;
   --color-dim-foreground: #1d2021;
@@ -41,12 +41,12 @@
 html {
   background-color: #222;
   font-family: "Roboto Mono", monospace;
-  font-size: 18px;
+  font-size: clamp(0.8rem, 1vw, 2vw);
   color: #ddd;
 }
 
 h1 {
-  font-size: min(5vw, 2.5rem);
+  font-size: min(4vw, 2.5rem);
   font-weight: 700;
   text-align: center;
   text-decoration: underline;
@@ -83,11 +83,11 @@ code {
 
 article {
   background-color: #333;
-  width: 90%;
+  width: 100%;
   max-width: 56rem;
   margin: 0 auto 1rem;
-  border-radius: 1rem;
-  padding: 1rem;
+  border-radius: 1.7vw;
+  padding: 0.7rem;
 }
 
 section {

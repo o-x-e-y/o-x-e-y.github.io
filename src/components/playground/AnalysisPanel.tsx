@@ -59,30 +59,28 @@ export default function AnalysisPanel(props: Props) {
 
   return (
     <div
-      class="cursor-pointer border-2 border-[#444] rounded-lg bg-[#393939] p-1 sm:p-2"
+      class="cursor-pointer border-2 border-[#444] rounded-[1.7vw] bg-[#393939] p-1 sm:p-2"
       onClick={copyStats}
       title="Click to copy stats"
     >
       <div
-        class="grid p-[0.5vw] gap-[1.5vw] grid-flow-col"
+        class="p-[0.5vw] gap-[0.5vw] grid flex lg:grid-flow-col jusify-between"
         style={{
           "grid-auto-columns": "minmax(0, 1fr)",
         }}
       >
         {/* Left panel: finger usage & SFB per finger */}
         <div
-          class="p-[1vw]"
+          class="p-[3vw] lg:text-base order-2 lg:order-1"
           style={{
             "background-color": "#444",
             "text-align": "center",
-            "font-size": "1.4vw",
-            "border-radius": "0.5vw",
+            "border-radius": "1.7vw",
           }}
         >
           <b>Finger usage:</b>
           <table
             style={{
-              "font-size": "85%",
               margin: "2% auto",
               "text-align": "left",
             }}
@@ -123,7 +121,7 @@ export default function AnalysisPanel(props: Props) {
               </For>
             </tbody>
           </table>
-          <table style={{ "font-size": "85%", margin: "2% auto" }}>
+          <table style={{margin: "2% auto" }}>
             <tbody>
               <tr>
                 <td class="w-[45%] font-bold text-center border-none">
@@ -160,7 +158,6 @@ export default function AnalysisPanel(props: Props) {
           <div
             style={{
               "font-weight": "bold",
-              "font-size": "90%",
               margin: "-1.5% auto 3%",
               width: "60%",
             }}
@@ -170,7 +167,6 @@ export default function AnalysisPanel(props: Props) {
           <b>Sfb% per finger:</b>
           <table
             style={{
-              "font-size": "85%",
               margin: "2% auto",
               "text-align": "left",
             }}
@@ -214,13 +210,12 @@ export default function AnalysisPanel(props: Props) {
 
         {/* Right panel: trigram stats */}
         <div
+          class="p-[1vw] lg:text-[1rem] md:text-[1rem] min-text-[1vw] order-1"
           style={{
-            padding: "1vw",
             "padding-top": "0.8vw",
             "background-color": "#444",
             "text-align": "center",
-            "font-size": "1.4vw",
-            "border-radius": "0.5vw",
+            "border-radius": "1.7vw",
           }}
         >
           <StatLine
@@ -337,13 +332,11 @@ function StatLine(props: {
     <div
       style={{
         width: "fit-content",
-        "margin-left": "1vw",
-        "margin-top": props.topMargin ? "1.3vw" : "0.1vw",
-        "margin-bottom": props.bottomMargin ? "0.75vw" : undefined,
-        "font-size": "max(0.75vh, 1.05vw)",
+        "margin-top": props.topMargin ? "0.7vw" : "0.1vw",
+        "margin-bottom": props.bottomMargin ? "1.5rem" : undefined,
         "background-color": statBgColor(props.value, props.prev, props.lowerIsBetter),
         "border-radius": "2px",
-        padding: "0 2px",
+        padding: "0 1vw",
       }}
     >
       {props.label} {pct(props.value)}
