@@ -54,7 +54,7 @@ export default function LayoutSearch(props: Props) {
     <div
       style={{
         position: "relative",
-        display: "inline-block",
+        display: "inline-flex",
         "margin-left": "1rem",
       }}
     >
@@ -87,9 +87,9 @@ export default function LayoutSearch(props: Props) {
               setResults([]);
             }
           }}
+          class="w-[15.6vw] lg:w-[9.6vw]"
           style={{
-            width: "9.6vw",
-            padding: "0.2vw",
+            padding: "0.1vw",
             "background-color": "#444",
             color: "#ddd",
             border: "1px solid #aaa",
